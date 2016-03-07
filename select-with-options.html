@@ -1,0 +1,56 @@
+<dom-module id="select-with-options">
+    <template>
+        <select id="selectfix" on-change="changed">
+        </select>
+    </template>
+</dom-module>
+
+<script>
+    function createOption( parent, label, value ) {
+        var option = document.createElement('option');
+        option.textContent = label;
+        option.value = value;
+        parent.appendChild(option);
+    }
+
+    new Polymer({
+        is: 'select-with-options',
+        properties: {
+            items: { observer: '_renderOptions' },
+            value: { type: String, observer: '_setValue' },
+            disabled: { type: String, observer: '_setDisabled' },
+            itemValue: { type: String },
+            itemLabel: { type: String },
+            defaultLabel: { type: String },
+            defaultValue: { type: String }
+        },
+        _renderOptions: function() {
+            var select = this.$.selectfix;
+            while (select.firstChild) {
+                select.removeChild(select.firstChild);
+            }
+            if ( this.defaultLabel ) {
+                createOption( select, this.defaultLabel, this.defaultValue || '');
+            }
+            this.items.forEach( function( item ) {
+                var label = this.itemLabel ? item[this.itemLabel] : item;
+                var value = this.itemValue ? item[this.itemValue] : item;
+                createOption( select, label, value);
+            }, this );
+        },
+        _setValue: function() {
+            var select = this.$.selectfix;
+            select.value = this.value;
+        },
+        _setDisabled: function() {
+            var select = this.$.selectfix;
+            this.toggleAttribute('disabled', this.disabled != null, select);
+        },
+        changed: function(event)
+        {
+            this.set('value', event.target.value);
+        }
+    });
+
+</script>
+
