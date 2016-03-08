@@ -16,11 +16,11 @@
     new Polymer({
         is: 'select-with-options',
         properties: {
-            items: { observer: '_renderOptions' },
+            options: { observer: '_renderOptions' },
             value: { type: String, observer: '_setValue' },
             disabled: { type: String, observer: '_setDisabled' },
-            itemValue: { type: String },
-            itemLabel: { type: String },
+            optionValue: { type: String },
+            optionLabel: { type: String },
             defaultLabel: { type: String },
             defaultValue: { type: String }
         },
@@ -32,9 +32,9 @@
             if ( this.defaultLabel ) {
                 createOption( select, this.defaultLabel, this.defaultValue || '');
             }
-            this.items.forEach( function( item ) {
-                var label = this.itemLabel ? item[this.itemLabel] : item;
-                var value = this.itemValue ? item[this.itemValue] : item;
+            this.options.forEach( function( option ) {
+                var label = this.optionLabel ? option[this.optionLabel] : option;
+                var value = this.optionValue ? option[this.optionValue] : option;
                 createOption( select, label, value);
             }, this );
         },
