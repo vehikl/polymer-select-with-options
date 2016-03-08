@@ -1,6 +1,6 @@
 <dom-module id="select-with-options">
     <template>
-        <select id="selectfix" on-change="changed">
+        <select id="select" on-change="changed">
         </select>
     </template>
 </dom-module>
@@ -24,8 +24,11 @@
             defaultLabel: { type: String },
             defaultValue: { type: String }
         },
+        ready: function() {
+            this.$.select.value = this.value;
+        },
         _renderOptions: function() {
-            var select = this.$.selectfix;
+            var select = this.$.select;
             while (select.firstChild) {
                 select.removeChild(select.firstChild);
             }
@@ -39,11 +42,10 @@
             }, this );
         },
         _setValue: function() {
-            var select = this.$.selectfix;
-            select.value = this.value;
+            this.$.select.value = this.value;
         },
         _setDisabled: function() {
-            var select = this.$.selectfix;
+            var select = this.$.select;
             this.toggleAttribute('disabled', this.disabled != null, select);
         },
         changed: function(event)

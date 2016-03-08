@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select-with-options demo</title>
+</head>
+<body>
+    <link rel="import" href="polymer.html">
+    <link rel="import" href="select-with-options.html">
+
+    <dom-module id="demo-1">
+        <template>
+            <div>
+                <select-with-options options="{{options}}" value="{{value::change}}"></select-with-options>
+                <span>{{value}}</span>
+            </div>
+        </template>
+    </dom-module>
+    <script>
+        new Polymer({
+            is: 'demo-1',
+            properties: {
+                value : {
+                    type: String,
+                    value: 'three'
+                },
+                options: {
+                    value: [
+                        'one',
+                        'two',
+                        'three'
+                    ]
+                }
+            }
+        });
+    </script>
+
+    <dom-module id="demo-2">
+        <template>
+            <div>
+                <select-with-options options="{{options}}" option-value="id" option-label="name" value="{{value::change}}"></select-with-options>
+                <span>{{value}}</span>
+            </div>
+        </template>
+    </dom-module>
+    <script>
+        new Polymer({
+            is: 'demo-2',
+            properties: {
+                value : {
+                    type: String,
+                    value: 2
+                },
+                options: {
+                    value: [
+                        {id: 1, name: 'One'},
+                        {id: 2, name: 'Two'},
+                        {id: 3, name: 'Three'}
+                    ]
+                }
+            }
+        });
+    </script>
+
+    <demo-1></demo-1>
+    <demo-2></demo-2>
+</body>
+</html>
