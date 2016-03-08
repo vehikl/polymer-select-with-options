@@ -3,6 +3,7 @@
         var option = document.createElement('option');
         option.textContent = label;
         option.value = value;
+        option.autoAdded = true;
         parent.appendChild(option);
     }
 
@@ -12,17 +13,19 @@
         properties: {
             options: { observer: '_renderOptions' },
             optionValue: { type: String },
-            optionLabel: { type: String },
-            defaultLabel: { type: String },
-            defaultValue: { type: String }
+            optionLabel: { type: String }
         },
         _renderOptions: function() {
+            var baseOptions = [];
             while (this.firstChild) {
+                if (!this.firstChild.autoAdded) {
+                    baseOptions.push(this.firstChild);
+                }
                 this.removeChild(this.firstChild);
             }
-            if ( this.defaultLabel ) {
-                createOption( this, this.defaultLabel, this.defaultValue || '');
-            }
+            baseOptions.forEach( function( option ) {
+                this.appendChild( option );
+            }, this );
             this.options.forEach( function( option ) {
                 var label = this.optionLabel ? option[this.optionLabel] : option;
                 var value = this.optionValue ? option[this.optionValue] : option;
