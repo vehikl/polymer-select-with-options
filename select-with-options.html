@@ -1,12 +1,5 @@
-<dom-module id="select-with-options">
-    <template>
-        <select id="select" on-change="changed">
-        </select>
-    </template>
-</dom-module>
-
 <script>
-    function createOption( parent, label, value ) {
+    function createOption(parent, label, value ) {
         var option = document.createElement('option');
         option.textContent = label;
         option.value = value;
@@ -15,42 +8,26 @@
 
     new Polymer({
         is: 'select-with-options',
+        extends: 'select',
         properties: {
             options: { observer: '_renderOptions' },
-            value: { type: String, observer: '_setValue' },
-            disabled: { type: String, observer: '_setDisabled' },
             optionValue: { type: String },
             optionLabel: { type: String },
             defaultLabel: { type: String },
             defaultValue: { type: String }
         },
-        ready: function() {
-            this.$.select.value = this.value;
-        },
         _renderOptions: function() {
-            var select = this.$.select;
-            while (select.firstChild) {
-                select.removeChild(select.firstChild);
+            while (this.firstChild) {
+                this.removeChild(this.firstChild);
             }
             if ( this.defaultLabel ) {
-                createOption( select, this.defaultLabel, this.defaultValue || '');
+                createOption( this, this.defaultLabel, this.defaultValue || '');
             }
             this.options.forEach( function( option ) {
                 var label = this.optionLabel ? option[this.optionLabel] : option;
                 var value = this.optionValue ? option[this.optionValue] : option;
-                createOption( select, label, value);
+                createOption( this, label, value);
             }, this );
-        },
-        _setValue: function() {
-            this.$.select.value = this.value;
-        },
-        _setDisabled: function() {
-            var select = this.$.select;
-            this.toggleAttribute('disabled', this.disabled != null, select);
-        },
-        changed: function(event)
-        {
-            this.set('value', event.target.value);
         }
     });
 
