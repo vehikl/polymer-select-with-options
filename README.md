@@ -1,9 +1,7 @@
 ##Select with options
 
-There is a known limitation with Polymer (more specifically with template tags) using dom-repeats inside of ```<select>``` tags in Internet Explorer. This is called out in Polymer's issue [#1735](https://github.com/Polymer/polymer/issues/1735)
-
- This component works around this issue without the need for much rework.
-
+Replacement for `select` element that works with browsers (like Internet Explorer, including IE11) that don't support templates (including `dom-repeat`) inside ```<select>``` tags.
+See Polymer issue [#1735](https://github.com/Polymer/polymer/issues/1735).
 
 ## Quick start
 
@@ -15,7 +13,7 @@ Several quick start options are available:
 
 ### What's included
 
-For an existing polymer project only the select-with-option.html file is required to be imported. The remaining html files are for use in the demo.html file.
+For an existing Polymer project, only the `select-with-option.html` file is required to be imported. The remaining files are for use in the demo.
 
 ```
 ├── README.md
@@ -29,17 +27,17 @@ For an existing polymer project only the select-with-option.html file is require
 
 ## Usage
 
-Import select-with-options.html into your project;
+Import `select-with-options.html` into your project;
 
 ```
 <link rel="import" href="select-with-options.html">
 ```
 
-This package supports data-binding an array of String, an array of Objects as well as hard coded options.
+This component supports data-binding an array of String, an array of Objects as well as hard coded options.
 
 ###Array of Strings
 
-Simply bind an array of options as strings to the 'options' attribute. The value will be mapped to both 'value' and 'label'
+Simply bind an array of strings to the 'options' attribute. The array values will be mapped to both 'value' and 'label'.
 
 ```
 <select is="select-with-options" options="{{options}}" value="{{value::change}}"></select>
@@ -47,7 +45,7 @@ Simply bind an array of options as strings to the 'options' attribute. The value
 
 ###Array of Objects
 
-If you supply an array of objects as yoru options there are additional parameters to specify which object properties to map as the value and label (option-value and option-label)
+If you supply an array of objects there are additional parameters to specify which object properties to map as the `value` and `label` (`option-value` and `option-label`).
 
 ```
 <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}"></select>
@@ -55,39 +53,13 @@ If you supply an array of objects as yoru options there are additional parameter
 
 ###Hard coded options
 
-Just like a standard select element, you can provide hard coded ```<option>``` tags.
+Just like a standard `select` element, you can provide hard-coded ```<option>``` tags, which are displayed before those provided in the `options` attribute.
 
 ```
 <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
     <option value="hardcoded_option">Hardcoded Option</option>
 </select>
-```
 
-## Dependencies
+## Demo
 
-If you are not using a pre-compiler, you will need to wrap your Polymer objects in an event listener for WebComponentsReady as outlined in the WebComponents.js documentation:
-
-[http://webcomponents.org/polyfills/html-imports/](http://webcomponents.org/polyfills/html-imports/)
-
-You can see an example of this in demo.html-imports
-
-```
-window.addEventListener('WebComponentsReady', function(e) {
-    new Polymer({
-        is: 'demo-1',
-        properties: {
-            value : {
-                type: String,
-                value: 'three'
-            },
-            options: {
-                value: [
-                    'one',
-                    'two',
-                    'three'
-                ]
-            }
-        }
-    });
-});
-```
+Load `demo.html`.
