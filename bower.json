@@ -6,7 +6,7 @@
     "Kris Braun <k.braun@vehikl.com>",
     "Richard Bettridge <r.bettridge@vehikl.com>"
   ],
-  "description": "This component sovles the dom-repeat limitation with IE by taking in an array of options and rendering a select element. Data binding is fully supported",
+  "description": "Replacement for select element that works with browsers (like IE) that don't support templates inside select tags.",
   "main": "select-with-options.html",
   "moduleType": [
     "es6"
