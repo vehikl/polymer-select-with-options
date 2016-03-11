@@ -21,7 +21,7 @@ Several quick start options are available:
 
 ### What's included
 
-Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
+For an existing polymer project only the select-with-option.html file is required to be imported. The remaining html files are for use in the demo.html file.
 
 ```
 ├── README.md
@@ -33,24 +33,35 @@ Within the download you'll find the following directories and files, logically g
 └── select-with-options.html
 ```
 
-For an existing polymer project only the select-with-option.html file is required to be imported. The remaining html files are for use in the demo.html file.
-
 ## Usage
 
 Import select-with-options.html into your project;
+
 ```
 <link rel="import" href="select-with-options.html">
 ```
 
+This package supports data-binding an array of String, an array of Objects as well as hard coded options.
 
+#Array of Strings
+
+Simply bind an array of options as strings to the 'options' attribute. The value will be mapped to both 'value' and 'label'
 
 ```
 <select is="select-with-options" options="{{options}}" value="{{value::change}}"></select>
 ```
 
+#Array of Objects
+
+If you supply an array of objects as yoru options there are additional parameters to specify which object properties to map as the value and label (option-value and option-label)
+
 ```
 <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}"></select>
 ```
+
+#Hard coded options
+
+Just like a standard select element, you can provide hard coded ```<option>``` tags.
 
 ```
 <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
