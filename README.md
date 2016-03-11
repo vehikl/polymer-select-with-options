@@ -1,10 +1,4 @@
-Select with options
-
-import: <link rel="import" href="components/select-fix.html">
-
-
-
-#Select with options
+##Select with options
 
 There is a known limitation with Polymer (more specifically with template tags) using dom-repeats inside of ```<select>``` tags in Internet Explorer. This is called out in Polymer's issue [#1735](https://github.com/Polymer/polymer/issues/1735)
 
@@ -43,7 +37,7 @@ Import select-with-options.html into your project;
 
 This package supports data-binding an array of String, an array of Objects as well as hard coded options.
 
-#Array of Strings
+###Array of Strings
 
 Simply bind an array of options as strings to the 'options' attribute. The value will be mapped to both 'value' and 'label'
 
@@ -51,7 +45,7 @@ Simply bind an array of options as strings to the 'options' attribute. The value
 <select is="select-with-options" options="{{options}}" value="{{value::change}}"></select>
 ```
 
-#Array of Objects
+###Array of Objects
 
 If you supply an array of objects as yoru options there are additional parameters to specify which object properties to map as the value and label (option-value and option-label)
 
@@ -59,7 +53,7 @@ If you supply an array of objects as yoru options there are additional parameter
 <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}"></select>
 ```
 
-#Hard coded options
+###Hard coded options
 
 Just like a standard select element, you can provide hard coded ```<option>``` tags.
 
