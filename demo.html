@@ -17,21 +17,23 @@
         </template>
     </dom-module>
     <script>
-        new Polymer({
-            is: 'demo-1',
-            properties: {
-                value : {
-                    type: String,
-                    value: 'three'
-                },
-                options: {
-                    value: [
-                        'one',
-                        'two',
-                        'three'
-                    ]
+        window.addEventListener('WebComponentsReady', function(e) {
+            new Polymer({
+                is: 'demo-1',
+                properties: {
+                    value : {
+                        type: String,
+                        value: 'three'
+                    },
+                    options: {
+                        value: [
+                            'one',
+                            'two',
+                            'three'
+                        ]
+                    }
                 }
-            }
+            });
         });
     </script>
 
@@ -44,21 +46,23 @@
         </template>
     </dom-module>
     <script>
-        new Polymer({
-            is: 'demo-2',
-            properties: {
-                value : {
-                    type: String,
-                    value: 2
-                },
-                options: {
-                    value: [
-                        {id: 1, name: 'One'},
-                        {id: 2, name: 'Two'},
-                        {id: 3, name: 'Three'}
-                    ]
+        window.addEventListener('WebComponentsReady', function(e) {
+            new Polymer({
+                is: 'demo-2',
+                properties: {
+                    value : {
+                        type: String,
+                        value: 2
+                    },
+                    options: {
+                        value: [
+                            {id: 1, name: 'One'},
+                            {id: 2, name: 'Two'},
+                            {id: 3, name: 'Three'}
+                        ]
+                    }
                 }
-            }
+            });
         });
     </script>
 
