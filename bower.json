@@ -1,0 +1,28 @@
+{
+  "name": "polymer-select-with-options",
+  "version": "0.0.1",
+  "homepage": "https://github.com/vehikl/polymer-select-with-options",
+  "authors": [
+    "Kris Braun <k.braun@vehikl.com>",
+    "Richard Bettridge <r.bettridge@vehikl.com>"
+  ],
+  "description": "This component sovles the dom-repeat limitation with IE by taking in an array of options and rendering a select element. Data binding is fully supported",
+  "main": "select-with-options.html",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "polymer",
+    "select",
+    "dom-repeat",
+    "tempalte"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
