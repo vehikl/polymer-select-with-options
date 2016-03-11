@@ -63,4 +63,4 @@ Just like a standard `select` element, you can provide hard-coded ```<option>```
 
 ## Demo
 
-Load `demo.html`.
+Live preview available [here](http://vehikl.github.io/polymer-select-with-options/). Source for demo is available in `demo.html` 
