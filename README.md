@@ -59,6 +59,7 @@ Just like a standard `select` element, you can provide hard-coded ```<option>```
 <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
     <option value="hardcoded_option">Hardcoded Option</option>
 </select>
+```
 
 ## Demo
 
