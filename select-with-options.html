@@ -16,6 +16,8 @@
             optionLabel: { type: String }
         },
         _renderOptions: function() {
+            var currentValue = this.value;
+            
             var baseOptions = [];
             while (this.firstChild) {
                 if (!this.firstChild.autoAdded) {
@@ -31,6 +33,8 @@
                 var value = this.optionValue ? option[this.optionValue] : option;
                 createOption( this, label, value);
             }, this );
+
+            this.value = currentValue;
         }
     });
 
