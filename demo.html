@@ -12,7 +12,7 @@
     <dom-module id="demo-1">
         <template>
             <div>
-                <select is="select-with-options" options="{{options}}" value="{{value::change}}">
+                <select is="select-with-options" options-list="{{options}}" value="{{value::change}}">
                 </select>
                 <span>{{value}}</span>
             </div>
@@ -41,7 +41,7 @@
     <dom-module id="demo-2">
         <template>
             <div>
-                <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
+                <select is="select-with-options" options-list="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
                 </select>
                 <span>{{value}}</span>
             </div>
@@ -71,7 +71,7 @@
     <dom-module id="demo-3">
         <template>
             <div>
-                <select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
+                <select is="select-with-options" options-list="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
                     <option value="hardcoded_option">Hardcoded Option</option>
                 </select>
                 <span>{{value}}</span>

@@ -37,10 +37,10 @@ This component supports data-binding an array of String, an array of Objects as 
 
 ###Array of Strings
 
-Simply bind an array of strings to the 'options' attribute. The array values will be mapped to both 'value' and 'label'.
+Simply bind an array of strings to the 'options-list' attribute. The array values will be mapped to both 'value' and 'label'.
 
 ```
-<select is="select-with-options" options="{{options}}" value="{{value::change}}"></select>
+<select is="select-with-options" options-list="{{options}}" value="{{value::change}}"></select>
 ```
 
 ###Array of Objects
@@ -48,7 +48,7 @@ Simply bind an array of strings to the 'options' attribute. The array values wil
 If you supply an array of objects there are additional parameters to specify which object properties to map as the `value` and `label` (`option-value` and `option-label`).
 
 ```
-<select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}"></select>
+<select is="select-with-options" options-list="{{options}}" option-value="id" option-label="name" value="{{value::change}}"></select>
 ```
 
 ###Hard coded options
@@ -56,7 +56,7 @@ If you supply an array of objects there are additional parameters to specify whi
 Just like a standard `select` element, you can provide hard-coded ```<option>``` tags, which are displayed before those provided in the `options` attribute.
 
 ```
-<select is="select-with-options" options="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
+<select is="select-with-options" options-list="{{options}}" option-value="id" option-label="name" value="{{value::change}}">
     <option value="hardcoded_option">Hardcoded Option</option>
 </select>
 ```
