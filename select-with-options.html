@@ -1,9 +1,11 @@
 <script>
-    function createOption(parent, label, value) {
+    function createOption(parent, label, value, selected) {
         var option = document.createElement('option');
         option.textContent = label;
         option.value = value;
         option.autoAdded = true;
+        if (selected)
+            option.setAttribute('selected', '');
         parent.appendChild(option);
     }
 
@@ -11,30 +13,46 @@
         is: 'select-with-options',
         extends: 'select',
         properties: {
-            optionsList: { observer: '_renderOptions' },
+            optionsList: { observer: '_optionsListChanged' },
             optionValue: { type: String },
             optionLabel: { type: String }
         },
-        _renderOptions: function() {
-            var currentValue = this.value;
+        attached: function () {
+            var currentValue = this._getValueString(this.value);
+            var baseOptions =
+                Polymer.dom(this.root).querySelectorAll('option')
+                    .filter(function (option) {
+                            return !option.autoAdded;
+                        })
+                    .forEach(function (option) {
+                            if (this._getValueString(option.getAttribute('value')) == currentValue)
+                                option.selected = true;
+                        }.bind(this));
+        },
+        _optionsListChanged: function(newOptionsList) {
+            var currentValue = this._getValueString(this.value);
 
-            var baseOptions = [];
-            while (this.firstChild) {
-                if (!this.firstChild.autoAdded) {
-                    baseOptions.push(this.firstChild);
-                }
-                this.removeChild(this.firstChild);
-            }
-            baseOptions.forEach(function(option) {
-                this.appendChild(option);
-            }, this);
-            this.optionsList.forEach(function(option) {
-                var label = this.optionLabel ? option[this.optionLabel] : option;
-                var value = this.optionValue ? option[this.optionValue] : option;
-                createOption(this, label, value);
-            }, this);
+            var newValueLabelPairs = newOptionsList.map(function (option) {
+                    return {
+                        value: this._getValueString(this.optionValue ? option[this.optionValue] : option),
+                        label: this.optionLabel ? option[this.optionLabel] : option
+                    };
+                }.bind(this));
 
-            this.value = currentValue;
+            Polymer.dom(this.root).querySelectorAll('option').filter(function (option) { return option.autoAdded; })
+                .forEach(function (option) {
+                    this.removeChild(option);
+                }.bind(this));
+
+            newValueLabelPairs.forEach(function (option) {
+                createOption(this, option.label, option.value, currentValue === option.value);
+            }, this);
+        },
+        _getValueString: function (val) {
+            if (val === null || val === undefined)
+                return '';
+            else
+                return val.toString();
         }
     });
 </script>
