@@ -15,7 +15,8 @@
         properties: {
             optionsList: { observer: '_optionsListChanged' },
             optionValue: { type: String },
-            optionLabel: { type: String }
+            optionLabel: { type: String },
+            keepValueWithNoMatchingOption: Boolean
         },
         attached: function () {
             var currentValue = this._getValueString(this.value);
@@ -41,6 +42,10 @@
 
             Polymer.dom(this.root).querySelectorAll('option').filter(function (option) { return option.autoAdded; })
                 .forEach(function (option) {
+                    if (!this.keepValueWithNoMatchingOption && option.selected && !newValueLabelPairs.filter(function(o) { return o.value === currentValue; })[0]) {
+                        this.set('value', '');
+                        this.fire('change'); // Needed so the uses of original <select value="prop::change"> have their prop updated too
+                    }
                     this.removeChild(option);
                 }.bind(this));
 
