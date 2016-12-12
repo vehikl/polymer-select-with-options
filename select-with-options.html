@@ -16,19 +16,34 @@
             optionsList: { observer: '_optionsListChanged' },
             optionValue: { type: String },
             optionLabel: { type: String },
-            keepValueWithNoMatchingOption: Boolean
+            keepValueWithNoMatchingOption: Boolean,
+            value: { // Need to declare this property (thus overriding the native one) or else we don't receive changes from host's bound path
+                type: String,
+                observer: '_valueChanged',
+                notify: true
+            }
         },
-        attached: function () {
-            var currentValue = this._getValueString(this.value);
-            var baseOptions =
-                Polymer.dom(this.root).querySelectorAll('option')
-                    .filter(function (option) {
-                            return !option.autoAdded;
-                        })
-                    .forEach(function (option) {
-                            if (this._getValueString(option.getAttribute('value')) == currentValue)
-                                option.selected = true;
-                        }.bind(this));
+        ready: function () {
+            var currentlyInChange = false;
+            this.addEventListener('change', function () {
+                // After overriding 'value' property (which is needed, see above), the host's bound path in turn doesn't get updated when user interacts with the control.
+                // Using `this.set` and firing a 'change' event manually seem to fix it
+                if (this.selectedIndex >= 0) { // But need to use `selectedIndex`, since the this.value override for some reason does not fetch the value of the underlying native property but shows the unchanged option.
+                    this.set('value', Polymer.dom(this.root).querySelectorAll('option')[this.selectedIndex].value);
+                    try {
+                        if (currentlyInChange)
+                            return;
+                        currentlyInChange = true;
+                        this.fire('change'); 
+                    }
+                    finally {
+                        currentlyInChange = false;
+                    }
+                }
+            }.bind(this));
+        },
+        _valueChanged: function () {
+            this._updateSelectedOption();
         },
         _optionsListChanged: function(newOptionsList) {
             var currentValue = this._getValueString(this.value);
@@ -52,6 +67,16 @@
             newValueLabelPairs.forEach(function (option) {
                 createOption(this, option.label, option.value, currentValue === option.value);
             }, this);
+        },
+        _updateSelectedOption: function () {
+            var currentValue = this._getValueString(this.value);
+            var baseOptions =
+                Polymer.dom(this.root).querySelectorAll('option')
+                    .forEach(function (option) {
+                        if (this._getValueString(option.getAttribute('value')) == currentValue)
+                            option.selected = true;
+                    }.bind(this));
+
         },
         _getValueString: function (val) {
             if (val === null || val === undefined)
