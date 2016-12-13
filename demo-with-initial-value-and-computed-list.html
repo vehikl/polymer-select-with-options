@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select-with-options demo</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.min.js"></script>
+    <link rel="import" href="polymer.html">
+    <link rel="import" href="select-with-options.html">
+
+
+    <dom-module id="with-initial-value-and-computed-list">
+        <template>
+            <div>
+                <span> Initial value is '{{initialAirport}}'. It should be visible on load in the dropdown:</span>
+                <select value="{{airport::change}}" is="select-with-options" options-list="{{getAirportsForCity(city)}}" option-value="id" option-label="name">
+                    <option value="">Unspecified</option>
+                </select>
+                <span>Current value is '{{airport}}'.</span>
+            </div>
+        </template>
+    </dom-module>
+<script>
+    var initialAirport = 'LHR';
+    window.addEventListener('WebComponentsReady', function(e) {
+        new Polymer({
+            is: 'with-initial-value-and-computed-list',
+            properties: {
+                airport: {
+                    type: String,
+                    value: initialAirport
+                },
+                initialAirport: {
+                    type: String,
+                    value: initialAirport
+                },
+                city: {
+                    type: String,
+                    value: 'London'
+                }
+            },
+            getAirportsForCity: function (key) {
+                var airportsByCities = {
+                    'London': [
+                        { id: 'LHR', name: 'London Heathrow' },
+                        { id: 'LTN', name: 'Luton' },
+                    ],
+                };
+                return airportsByCities[key];
+            }
+        });
+    });
+</script>
+    <with-initial-value-and-computed-list></with-initial-value-and-computed-list>
+
+</body>
+</html>
