@@ -18,6 +18,7 @@
                     <option value="">Unspecified</option>
                 </select>
                 <span>Current value is '{{airport}}'.</span>
+                <button on-tap="changeValue">Change to 'LTN' using data-binding</button>
             </div>
         </template>
     </dom-module>
@@ -48,6 +49,9 @@
                     ],
                 };
                 return airportsByCities[key];
+            },
+            changeValue: function() {
+                this.set('value', 'LTN');
             }
         });
     });
